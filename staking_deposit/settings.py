@@ -1,4 +1,5 @@
 from typing import Dict, NamedTuple
+from os import environ
 
 
 DEPOSIT_CLI_VERSION = '2.0.0'
@@ -13,6 +14,7 @@ MAINNET = 'mainnet'
 PRATER = 'prater'
 KINTSUGI = 'kintsugi'
 KILN = 'kiln'
+TEST = 'test'
 
 
 # Mainnet setting
@@ -23,6 +25,7 @@ PraterSetting = BaseChainSetting(NETWORK_NAME=PRATER, GENESIS_FORK_VERSION=bytes
 KintsugiSetting = BaseChainSetting(NETWORK_NAME=KINTSUGI, GENESIS_FORK_VERSION=bytes.fromhex('60000069'))
 # Merge Testnet (spec v1.1.9)
 KilnSetting = BaseChainSetting(NETWORK_NAME=KILN, GENESIS_FORK_VERSION=bytes.fromhex('70000069'))
+TestSetting = BaseChainSetting(NETWORK_NAME=TEST, GENESIS_FORK_VERSION=bytes.fromhex(environ.get('GENESIS_FORK_VERSION', '12345678')))
 
 
 ALL_CHAINS: Dict[str, BaseChainSetting] = {
@@ -30,6 +33,7 @@ ALL_CHAINS: Dict[str, BaseChainSetting] = {
     PRATER: PraterSetting,
     KINTSUGI: KintsugiSetting,
     KILN: KilnSetting,
+    TEST: TestSetting,
 }
 
 
