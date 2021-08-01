@@ -14,6 +14,7 @@ MAINNET = 'mainnet'
 PRATER = 'prater'
 KINTSUGI = 'kintsugi'
 KILN = 'kiln'
+STAKE = 'stake'
 TEST = 'test'
 
 
@@ -25,6 +26,8 @@ PraterSetting = BaseChainSetting(NETWORK_NAME=PRATER, GENESIS_FORK_VERSION=bytes
 KintsugiSetting = BaseChainSetting(NETWORK_NAME=KINTSUGI, GENESIS_FORK_VERSION=bytes.fromhex('60000069'))
 # Merge Testnet (spec v1.1.9)
 KilnSetting = BaseChainSetting(NETWORK_NAME=KILN, GENESIS_FORK_VERSION=bytes.fromhex('70000069'))
+
+StakeSetting = BaseChainSetting(ETH2_NETWORK_NAME=STAKE, GENESIS_FORK_VERSION=bytes.fromhex('00006464'))
 TestSetting = BaseChainSetting(NETWORK_NAME=TEST, GENESIS_FORK_VERSION=bytes.fromhex(environ.get('GENESIS_FORK_VERSION', '12345678')))
 
 
@@ -33,6 +36,7 @@ ALL_CHAINS: Dict[str, BaseChainSetting] = {
     PRATER: PraterSetting,
     KINTSUGI: KintsugiSetting,
     KILN: KilnSetting,
+    STAKE: StakeSetting,
     TEST: TestSetting,
 }
 
