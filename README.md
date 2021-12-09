@@ -113,7 +113,7 @@ docker run -it --rm -v $(pwd)/validator_keys:/app/validator_keys ghcr.io/gnosisc
 Example for 1 validator on the Gnosis Chain using english:
 
 ```sh
-docker run -it --rm -v $(pwd)/validator_keys:/app/validator_keys ethereum/eth2.0-deposit-cli new-mnemonic --num_validators=1 --mnemonic_language=english --chain=gnosis
+docker run -it --rm -v $(pwd)/validator_keys:/app/validator_keys ghcr.io/gnosischain/validator-data-generator:latest new-mnemonic --num_validators=1 --mnemonic_language=english --chain=gnosis
 ```
 
 ##### Commands
