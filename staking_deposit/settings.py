@@ -14,7 +14,8 @@ MAINNET = 'mainnet'
 PRATER = 'prater'
 KINTSUGI = 'kintsugi'
 KILN = 'kiln'
-STAKE = 'stake'
+GNOSIS_TESTNET = 'gnosis-testnet'
+GNOSIS = 'gnosis'
 TEST = 'test'
 
 
@@ -27,7 +28,11 @@ KintsugiSetting = BaseChainSetting(NETWORK_NAME=KINTSUGI, GENESIS_FORK_VERSION=b
 # Merge Testnet (spec v1.1.9)
 KilnSetting = BaseChainSetting(NETWORK_NAME=KILN, GENESIS_FORK_VERSION=bytes.fromhex('70000069'))
 
-StakeSetting = BaseChainSetting(ETH2_NETWORK_NAME=STAKE, GENESIS_FORK_VERSION=bytes.fromhex('00006464'))
+# Gnosis Beacon Chain testnet setting
+GnosisTestnetSetting = BaseChainSetting(ETH2_NETWORK_NAME=GNOSIS_TESTNET, GENESIS_FORK_VERSION=bytes.fromhex('00006464'))
+# Gnosis Beacon Chain setting
+GnosisSetting = BaseChainSetting(ETH2_NETWORK_NAME=GNOSIS, GENESIS_FORK_VERSION=bytes.fromhex('00000064'))
+
 TestSetting = BaseChainSetting(NETWORK_NAME=TEST, GENESIS_FORK_VERSION=bytes.fromhex(environ.get('GENESIS_FORK_VERSION', '12345678')))
 
 
@@ -36,7 +41,8 @@ ALL_CHAINS: Dict[str, BaseChainSetting] = {
     PRATER: PraterSetting,
     KINTSUGI: KintsugiSetting,
     KILN: KilnSetting,
-    STAKE: StakeSetting,
+    GNOSIS_TESTNET: GnosisTestnetSetting,
+    GNOSIS: GnosisSetting,
     TEST: TestSetting,
 }
 
