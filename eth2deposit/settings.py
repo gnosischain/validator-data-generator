@@ -13,7 +13,8 @@ class BaseChainSetting(NamedTuple):
 MAINNET = 'mainnet'
 PYRMONT = 'pyrmont'
 PRATER = 'prater'
-STAKE = 'stake'
+GNOSIS_TESTNET = 'gnosis-testnet'
+GNOSIS = 'gnosis'
 TEST = 'test'
 
 
@@ -24,7 +25,10 @@ PyrmontSetting = BaseChainSetting(ETH2_NETWORK_NAME=PYRMONT, GENESIS_FORK_VERSIO
 # Eth2 testnet (spec v1.0.1)
 PraterSetting = BaseChainSetting(ETH2_NETWORK_NAME=PRATER, GENESIS_FORK_VERSION=bytes.fromhex('00001020'))
 
-StakeSetting = BaseChainSetting(ETH2_NETWORK_NAME=STAKE, GENESIS_FORK_VERSION=bytes.fromhex('00006464'))
+# Gnosis Beacon Chain testnet setting
+GnosisTestnetSetting = BaseChainSetting(ETH2_NETWORK_NAME=GNOSIS_TESTNET, GENESIS_FORK_VERSION=bytes.fromhex('00006464'))
+# Gnosis Beacon Chain setting
+GnosisSetting = BaseChainSetting(ETH2_NETWORK_NAME=GNOSIS, GENESIS_FORK_VERSION=bytes.fromhex('00000064'))
 TestSetting = BaseChainSetting(ETH2_NETWORK_NAME=TEST, GENESIS_FORK_VERSION=bytes.fromhex(environ.get('GENESIS_FORK_VERSION', '12345678')))
 
 
@@ -32,7 +36,8 @@ ALL_CHAINS: Dict[str, BaseChainSetting] = {
     MAINNET: MainnetSetting,
     PYRMONT: PyrmontSetting,
     PRATER: PraterSetting,
-    STAKE: StakeSetting,
+    GNOSIS_TESTNET: GnosisTestnetSetting,
+    GNOSIS: GnosisSetting,
     TEST: TestSetting,
 }
 
