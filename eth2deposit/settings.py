@@ -10,20 +10,20 @@ class BaseChainSetting(NamedTuple):
     GENESIS_FORK_VERSION: bytes
 
 
-MAINNET = 'mainnet'
-PYRMONT = 'pyrmont'
-PRATER = 'prater'
+#MAINNET = 'mainnet'
+#PYRMONT = 'pyrmont'
+#PRATER = 'prater'
 GNOSIS_TESTNET = 'gnosis-testnet'
 GNOSIS = 'gnosis'
 TEST = 'test'
 
 
 # Eth2 Mainnet setting
-MainnetSetting = BaseChainSetting(ETH2_NETWORK_NAME=MAINNET, GENESIS_FORK_VERSION=bytes.fromhex('00000000'))
+#MainnetSetting = BaseChainSetting(ETH2_NETWORK_NAME=MAINNET, GENESIS_FORK_VERSION=bytes.fromhex('00000000'))
 # Eth2 pre-launch testnet (spec v1.0.0)
-PyrmontSetting = BaseChainSetting(ETH2_NETWORK_NAME=PYRMONT, GENESIS_FORK_VERSION=bytes.fromhex('00002009'))
+#PyrmontSetting = BaseChainSetting(ETH2_NETWORK_NAME=PYRMONT, GENESIS_FORK_VERSION=bytes.fromhex('00002009'))
 # Eth2 testnet (spec v1.0.1)
-PraterSetting = BaseChainSetting(ETH2_NETWORK_NAME=PRATER, GENESIS_FORK_VERSION=bytes.fromhex('00001020'))
+#PraterSetting = BaseChainSetting(ETH2_NETWORK_NAME=PRATER, GENESIS_FORK_VERSION=bytes.fromhex('00001020'))
 
 # Gnosis Beacon Chain testnet setting
 GnosisTestnetSetting = BaseChainSetting(ETH2_NETWORK_NAME=GNOSIS_TESTNET, GENESIS_FORK_VERSION=bytes.fromhex('00006464'))
@@ -33,14 +33,14 @@ TestSetting = BaseChainSetting(ETH2_NETWORK_NAME=TEST, GENESIS_FORK_VERSION=byte
 
 
 ALL_CHAINS: Dict[str, BaseChainSetting] = {
-    MAINNET: MainnetSetting,
-    PYRMONT: PyrmontSetting,
-    PRATER: PraterSetting,
+#    MAINNET: MainnetSetting,
+#    PYRMONT: PyrmontSetting,
+#    PRATER: PraterSetting,
     GNOSIS_TESTNET: GnosisTestnetSetting,
     GNOSIS: GnosisSetting,
     TEST: TestSetting,
 }
 
 
-def get_chain_setting(chain_name: str = MAINNET) -> BaseChainSetting:
+def get_chain_setting(chain_name: str = GNOSIS) -> BaseChainSetting:
     return ALL_CHAINS[chain_name]
