@@ -2,6 +2,11 @@ name: CI
 
 on:
   push:
+    tags:
+      - '**'
+    branches:
+      - master
+  workflow_dispatch:
 
 env:
   DOCKER_REGISTRY: ghcr.io
@@ -48,7 +53,6 @@ jobs:
             runner: windows-latest
     env:
       PYTHONHASHSEED: 42
-      BUILD_FILE_NAME: eth2deposit-cli-${{ github.sha }}-${{ matrix.os }}-amd64
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -57,24 +61,37 @@ jobs:
         with:
           python-version: 3.8
           architecture: x64
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=BUILD_FILE_NAME::gbc-validator-data-generator-$(git rev-parse --short HEAD)-${{ matrix.os }}-amd64"
       - name: Install building requirements on ${{ matrix.os }}
         run: |
           pip3 install -r ./build_configs/${{ matrix.os }}/requirements.txt;
       - name: Build with build.spec
         run: |
-          mkdir ${{ env.BUILD_FILE_NAME }};
-          pyinstaller --distpath ./${{ env.BUILD_FILE_NAME }} ./build_configs/${{ matrix.os }}/build.spec;
+          mkdir ${{ steps.vars.outputs.BUILD_FILE_NAME }};
+          pyinstaller --distpath ./${{ steps.vars.outputs.BUILD_FILE_NAME }} ./build_configs/${{ matrix.os }}/build.spec;
       - name: Compress the file
+        if: ${{ matrix.os == 'linux' }}
         run: |
-          tar -zcvf ${{ env.BUILD_FILE_NAME }}.tar.gz ./${{ env.BUILD_FILE_NAME }};
+          tar -zcvf ${{ steps.vars.outputs.BUILD_FILE_NAME }}.tar.gz ./${{ steps.vars.outputs.BUILD_FILE_NAME }};
           mkdir /tmp/artifacts;
-          cp ${{ env.BUILD_FILE_NAME }}.tar.gz /tmp/artifacts;
-      - name: Save checksum
-        if: ${{ matrix.os != 'macos' }}
-        run: sha256sum ${{ env.BUILD_FILE_NAME }}.tar.gz | head -c 64 > /tmp/artifacts/${{ env.BUILD_FILE_NAME }}.sha256
-      - name: Save checksum
+          cp ${{ steps.vars.outputs.BUILD_FILE_NAME }}.tar.gz /tmp/artifacts;
+          sha256sum ${{ steps.vars.outputs.BUILD_FILE_NAME }}.tar.gz | head -c 64 > /tmp/artifacts/${{ steps.vars.outputs.BUILD_FILE_NAME }}.sha256
+      - name: Compress the file
+        if: ${{ matrix.os == 'windows' }}
+        run: |
+          Compress-Archive -Path ./${{ steps.vars.outputs.BUILD_FILE_NAME }} -DestinationPath ./${{ steps.vars.outputs.BUILD_FILE_NAME }};
+          mkdir /tmp/artifacts;
+          cp ${{ steps.vars.outputs.BUILD_FILE_NAME }}.zip /tmp/artifacts;
+          sha256sum ${{ steps.vars.outputs.BUILD_FILE_NAME }}.zip | head -c 64 > /tmp/artifacts/${{ steps.vars.outputs.BUILD_FILE_NAME }}.sha256
+      - name: Compress the file
         if: ${{ matrix.os == 'macos' }}
-        run: shasum -a 256 ${{ env.BUILD_FILE_NAME }}.tar.gz | head -c 64 > /tmp/artifacts/${{ env.BUILD_FILE_NAME }}.sha256
+        run: |
+          tar -zcvf ${{ steps.vars.outputs.BUILD_FILE_NAME }}.tar.gz ./${{ steps.vars.outputs.BUILD_FILE_NAME }};
+          mkdir /tmp/artifacts;
+          cp ${{ steps.vars.outputs.BUILD_FILE_NAME }}.tar.gz /tmp/artifacts;
+          shasum -a 256 ${{ steps.vars.outputs.BUILD_FILE_NAME }}.tar.gz | head -c 64 > /tmp/artifacts/${{ steps.vars.outputs.BUILD_FILE_NAME }}.sha256
       - name: Upload binary
         uses: actions/upload-artifact@v2
         with:
