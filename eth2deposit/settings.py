@@ -10,9 +10,9 @@ class BaseChainSetting(NamedTuple):
     GENESIS_FORK_VERSION: bytes
 
 
-#MAINNET = 'mainnet'
-#PYRMONT = 'pyrmont'
-#PRATER = 'prater'
+MAINNET = 'mainnet'
+PYRMONT = 'pyrmont'
+PRATER = 'prater'
 GNOSIS_TESTNET = 'gnosis-testnet'
 GNOSIS = 'gnosis'
 TEST = 'test'
