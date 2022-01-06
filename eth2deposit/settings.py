@@ -33,9 +33,9 @@ TestSetting = BaseChainSetting(ETH2_NETWORK_NAME=TEST, GENESIS_FORK_VERSION=byte
 
 
 ALL_CHAINS: Dict[str, BaseChainSetting] = {
-#    MAINNET: MainnetSetting,
-#    PYRMONT: PyrmontSetting,
-#    PRATER: PraterSetting,
+    MAINNET: MainnetSetting,
+    PYRMONT: PyrmontSetting,
+    PRATER: PraterSetting,
     GNOSIS_TESTNET: GnosisTestnetSetting,
     GNOSIS: GnosisSetting,
     TEST: TestSetting,
