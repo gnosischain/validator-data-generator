@@ -33,7 +33,8 @@ GnosisTestnetSetting = BaseChainSetting(NETWORK_NAME=GNOSIS_TESTNET, GENESIS_FOR
 # Gnosis Beacon Chain setting
 GnosisSetting = BaseChainSetting(NETWORK_NAME=GNOSIS, GENESIS_FORK_VERSION=bytes.fromhex('00000064'))
 
-TestSetting = BaseChainSetting(NETWORK_NAME=TEST, GENESIS_FORK_VERSION=bytes.fromhex(environ.get('GENESIS_FORK_VERSION', '12345678')))
+TestSetting = BaseChainSetting(NETWORK_NAME=TEST, GENESIS_FORK_VERSION=bytes.fromhex(
+    environ.get('GENESIS_FORK_VERSION', '12345678')))
 
 
 ALL_CHAINS: Dict[str, BaseChainSetting] = {
