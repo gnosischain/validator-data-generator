@@ -110,7 +110,7 @@ def generate_keys_arguments_decorator(function: Callable[..., Any]) -> Callable[
             param_decls='--eth1_withdrawal_address',
         ),
         jit_option(
-            callback=lambda ctx,param,x: int(x),
+            callback=lambda ctx, param, x: int(x),
             default=MAX_DEPOSIT_AMOUNT,
             help=('Amount to use in all deposit data files.'),
             param_decls='--amount',
