@@ -1,3 +1,8 @@
+# ⚠️ DEPRECATED ⚠️
+
+This Gnosis Deposit CLI is **no longer maintained**.  
+Please switch to [ethstaker deposit CLI](https://github.com/eth-educators/ethstaker-deposit-cli) instead.
+
 # Gnosis Chain validator's data generator
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
